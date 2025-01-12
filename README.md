@@ -95,6 +95,46 @@ Preprocessing is critical for ensuring the quality and consistency of input data
 
 **Results of RoBERTa Classification**: While not as robust as SVC, RandomForest, or Logistic Regression, RoBERTa achieved 70% accuracy on validation. Therefore, it was used for classification ROUND1 (FacebookAI/xlm-roberta-base) and ROUND2 (burakaytan/roberta-base-turkish-uncased).
 
+## Discussion: Classification
+
+In this project, the classification task was designed to categorize Instagram influencers into predefined categories based on the content of their posts and profiles. Several machine learning models and techniques were explored to achieve this goal, including traditional models like Support Vector Classifiers (SVC), Random Forests, LightGBM, Logistic Regression, and more complex approaches like Sentence Transformer embeddings with clustering and deep learning models such as RoBERTa.
+
+### Model Comparison
+
+The models experimented with yielded varying results, highlighting the different strengths and weaknesses of each approach.
+
+- **Support Vector Classifier (SVC)**: 
+  The SVC model achieved a solid validation accuracy of 67%, making it one of the best-performing models for this classification task. The model worked well due to its ability to find a clear margin of separation between the different influencer categories. The use of a linear kernel and balanced class weights ensured that the model wasn't biased toward more frequent categories, resulting in a reasonable performance across all labels.
+
+- **LightGBM**:
+  LightGBM, a gradient-boosted decision tree model, performed slightly worse than SVC, reaching 63% accuracy. While it showed good generalization capabilities in handling the features, it did not perform as well as SVC, possibly due to the complex and sparse nature of the textual data. LightGBM might not have been the best choice for a text-based classification task that benefits from rich semantic representations.
+
+- **Logistic Regression**:
+  Logistic Regression, though simple and fast, achieved a reasonable validation accuracy of 68%. It was able to capture linear relationships in the data but faced challenges with non-linear separations. However, after hyperparameter tuning and the application of balanced class weights, it provided decent accuracy, especially when considering its simplicity.
+
+- **Random Forest**:
+  Random Forest, achieving a validation accuracy of 64%, is an ensemble model known for handling diverse feature types and reducing overfitting. However, in this case, it was less effective than other models, likely due to its reliance on decision trees that might not capture the fine-grained distinctions needed in text classification tasks.
+
+- **RoBERTa (Deep Learning Approach)**:
+  The deep learning approach using pre-trained multilingual models like RoBERTa achieved the best accuracy in our experiments, particularly when using **FacebookAI/xlm-roberta-base**, which reached 70%. This performance highlights the power of contextualized embeddings, which are more adept at capturing the semantic nuances of influencer posts. However, the burden of training such models and their relatively high computational cost makes them less practical in production settings, especially when balanced against simpler models like SVC.
+
+- **Clustering with Sentence Embeddings**:
+  Combining SentenceTransformers with K-means clustering also yielded interesting results. Clustering helped group influencers with similar content profiles, and when these clusters were used in conjunction with a Random Forest classifier, the model’s performance improved. This approach, however, did not surpass the performance of RoBERTa or SVC but served as a viable method for improving interpretability and fine-tuning classification based on specific content clusters.
+
+### Challenges and Insights
+
+1. **Imbalanced Classes**: 
+   One of the main challenges in this classification task was dealing with the class imbalance present in the dataset. Certain categories were overrepresented, while others were sparse. The implementation of balanced class weights helped mitigate this issue by ensuring that minority classes were treated with equal importance during training.
+
+2. **Textual Complexity**:
+   Instagram posts, rich in hashtags, emojis, mentions, and informal language, posed challenges for traditional machine learning models. While the Turkish text preprocessing pipeline addressed many of these issues, the linguistic and cultural complexities of influencer language required careful handling of emojis, hashtags, and mentions. The advanced models like RoBERTa, which are capable of understanding contextual meaning, performed best in this setting.
+
+3. **Model Interpretability**: 
+   While models like Random Forest and SVC are more interpretable than deep learning models, they still have limitations in explaining the nuanced relationships between text features. The use of embeddings (e.g., RoBERTa) led to better performance but reduced transparency. Future work could focus on techniques like SHAP or LIME to make black-box models more interpretable.
+
+
+
+
 ## Instagram Like Count Prediction
 
 ### Overview
