@@ -93,7 +93,14 @@ Preprocessing is critical for ensuring the quality and consistency of input data
 
 **Results of SVC Classification**: SVC reached the best cross-validation accuracy among all models with a 67% accuracy rate and was used for ROUND3 classification.
 
+<img width="947" alt="1" src="https://github.com/user-attachments/assets/4316295a-c857-4d28-aaa8-77fed911749a" />
+
+
+
 **Results of RoBERTa Classification**: While not as robust as SVC, RandomForest, or Logistic Regression, RoBERTa achieved 70% accuracy on validation. Therefore, it was used for classification ROUND1 (FacebookAI/xlm-roberta-base) and ROUND2 (burakaytan/roberta-base-turkish-uncased).
+
+<img width="379" alt="2" src="https://github.com/user-attachments/assets/30c5264c-b749-4830-b6a6-b10aa2896929" />
+
 
 ## Discussion: Classification
 
